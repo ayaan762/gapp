@@ -1,53 +1,28 @@
-import { NextResponse } from 'next/server';
-import twilio from 'twilio';
+import { NextRequest, NextResponse } from "next/server";
+import twilio from "twilio";
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
-
-if (!accountSid || !authToken || !twilioPhoneNumber) {
-  console.error('Twilio credentials missing!');
-}
-
+const accountSid = process.env.TWILIO_ACCOUNT_SID!;
+const authToken = process.env.TWILIO_AUTH_TOKEN!;
 const client = twilio(accountSid, authToken);
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const { to, message } = await request.json();
+    const body = await request.json();
+    const { to } = body;
 
-    if (!to || !message) {
-      return NextResponse.json(
-        { success: false, message: 'Missing phone number or message' },
-        { status: 400 }
-      );
+    if (!to) {
+      return NextResponse.json({ message: "Missing 'to' phone number" }, { status: 400 });
     }
 
     const call = await client.calls.create({
-      twiml: `<Response><Say voice="alice">${message}</Say></Response>`,
+      url: "http://demo.twilio.com/docs/voice.xml",
       to,
-      from: twilioPhoneNumber,
-      statusCallback: `${process.env.NEXTAUTH_URL}/api/call/status`,
-      statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed'],
-      statusCallbackMethod: 'POST'
+      from: process.env.TWILIO_PHONE_NUMBER!,
     });
 
-    return NextResponse.json({
-      success: true,
-      callSid: call.sid,
-      status: call.status,
-      message: 'Call initiated successfully'
-    });
-
-  } catch (error: any) {
-    console.error('Twilio error:', error);
-    return NextResponse.json(
-      { 
-        success: false,
-        message: error.message.includes('Permission to call') 
-          ? 'International calling not enabled on your Twilio account'
-          : 'Failed to initiate call'
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ callSid: call.sid });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "An unknown error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

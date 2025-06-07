@@ -37,6 +37,7 @@ export default function GrievanceApp() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+<<<<<<< HEAD
   const selectedMistake = mistake === "GUESS" ? customMistake : mistake;
 
   const canSubmit = selectedMistake && fixes;
@@ -99,6 +100,24 @@ export default function GrievanceApp() {
   }
 };
 
+=======
+  const selectedMistake = mistake === "Other... 🙈" ? customMistake : mistake;
+
+  const canSubmit = selectedMistake && fixes;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canSubmit) return;
+    
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setSubmitted(true);
+    setIsSubmitting(false);
+  };
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
 
   const resetForm = () => {
     setSubmitted(false);
@@ -110,10 +129,13 @@ export default function GrievanceApp() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-pink-50 flex items-center justify-center p-4 md:p-6">
+<<<<<<< HEAD
        <audio autoPlay loop className="hidden">
       <source src="/background.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
+=======
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -134,7 +156,11 @@ export default function GrievanceApp() {
               transition={{ delay: 0.3 }}
             >
               <h1 className="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent">
+<<<<<<< HEAD
                 MAAFI HEROINE AB KYA KARDIA MENE? 😳
+=======
+                Oops! What did I do? 😳
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
               </h1>
             </motion.div>
 
@@ -162,7 +188,11 @@ export default function GrievanceApp() {
                   </motion.div>
                   <div className="space-y-3">
                     <p className="text-xl font-medium text-pink-700">
+<<<<<<< HEAD
                       Apology Has Been Asked For! 💌
+=======
+                      Apology Sent! 💌
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
                     </p>
                     <p className="text-pink-600">
                       Your heartfelt message is on its way ❤️
@@ -194,7 +224,11 @@ export default function GrievanceApp() {
                       </label>
                       <Select onValueChange={setMistake} value={mistake}>
                         <SelectTrigger className="hover:border-pink-300 focus:ring-2 focus:ring-pink-200">
+<<<<<<< HEAD
                           <SelectValue placeholder="Choose a mistake." />
+=======
+                          <SelectValue placeholder="Choose a mistake..." />
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
                         </SelectTrigger>
                         <SelectContent className="border-0 shadow-lg">
                           {mistakeOptions.map((opt) => (
@@ -210,7 +244,11 @@ export default function GrievanceApp() {
                       </Select>
                     </div>
 
+<<<<<<< HEAD
                     {mistake === "GUESS" && (
+=======
+                    {mistake === "Other... 🙈" && (
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
@@ -221,7 +259,11 @@ export default function GrievanceApp() {
                           Please Specify
                         </label>
                         <Input
+<<<<<<< HEAD
                           placeholder="Any Clues day date time person thing??"
+=======
+                          placeholder="Type your mistake here..."
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
                           value={customMistake}
                           onChange={(e) => setCustomMistake(e.target.value)}
                           required
@@ -235,7 +277,11 @@ export default function GrievanceApp() {
                         Details (optional)
                       </label>
                       <Textarea
+<<<<<<< HEAD
                         placeholder="Tell me more about how i messed up this time..."
+=======
+                        placeholder="Tell me more about what happened..."
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
                         value={details}
                         onChange={(e) => setDetails(e.target.value)}
                         className="min-h-[100px] focus:ring-2 focus:ring-pink-200"
@@ -244,10 +290,17 @@ export default function GrievanceApp() {
 
                     <div>
                       <label className="block mb-2 font-medium text-pink-600/90">
+<<<<<<< HEAD
                         {"How can I make it right (Suggestions Please"}
                       </label>
                       <Textarea
                         placeholder="Is there anyway i can fix this :("
+=======
+                        {"How I'll Make It Right"}
+                      </label>
+                      <Textarea
+                        placeholder="My sincere plan to fix this..."
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
                         value={fixes}
                         onChange={(e) => setFixes(e.target.value)}
                         required
@@ -275,7 +328,11 @@ export default function GrievanceApp() {
                       ) : (
                         <>
                           <Send className="w-4 h-4" />
+<<<<<<< HEAD
                           Fuck You Bitch
+=======
+                          Send Heartfelt Apology
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
                         </>
                       )}
                     </Button>
@@ -292,7 +349,11 @@ export default function GrievanceApp() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
+<<<<<<< HEAD
           Made with ❤️ only for Shruti Mishra
+=======
+          Made with ❤️ for special people
+>>>>>>> faed19635a0e08445296065faf219cd478c9fded
         </motion.div>
       </motion.div>
     </div>
