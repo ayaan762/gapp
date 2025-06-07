@@ -194,7 +194,7 @@ export default function GrievanceApp() {
 
                     <div>
                       <label className="block mb-2 font-medium text-pink-600/90">
-                        How I'll Make It Right
+                        {`How I'll Make It Right`}
                       </label>
                       <Textarea
                         placeholder="My sincere plan to fix this..."
